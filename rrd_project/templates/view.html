@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - View Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c8e6c9; /* Soft green background */
+            color: #1b5e20; /* Dark green text */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full height */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3a8d2d; /* Dark green for navbar */
+            padding: 10px 20px;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Ensure navbar is above other content */
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #2b6822; /* Darker green on hover */
+            border-radius: 5px;
+        }
+        .container {
+            flex: 1; /* Allow container to fill available space */
+            max-width: 1200px;
+            margin: 20px auto; /* Add margin to separate from navbar */
+            text-align: center;
+            background: #ffffff; /* White background for container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+        h1 {
+            color: #3a8d2d; /* Strong green for title */
+            margin-bottom: 20px;
+        }
+        .product-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row */
+    justify-content: space-evenly; /* Evenly space items */
+    gap: 20px; /* Space between products */
+}
+.product-card {
+    background-color: #ffffff; /* White background for cards */
+    border: 1px solid #a5d6a7; /* Light green border */
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    flex: 0 1 calc(20% - 20px); /* Adjust width for 5 items per row */
+    max-width: 200px; /* Limit max width for uniformity */
+}
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('buy_pro') }}" class="nav-link">Buy Products</a>
+            <a href="{{ url_for('view') }}" class="nav-link">View Products</a>
+            <a href="{{ url_for('sell') }}" class="nav-link">Sell Products</a>
+            <a href="{{ url_for('cart') }}" class="nav-link">View Cart</a>
+        </div>
+        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>View Products</h1>
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='uploads/' + product['Product Image']) }}" alt="{{ product['Product Name'] }}">
+                <h2>{{ product['Product Name'] }}</h2>
+                <p>{{ product['Product Description'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

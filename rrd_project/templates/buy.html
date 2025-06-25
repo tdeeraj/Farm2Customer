@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - Buy Fresh Produce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c8e6c9; /* Soft green background */
+            color: #1b5e20; /* Dark green text */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3a8d2d; /* Dark green for navbar */
+            padding: 10px 20px;
+            width: 100%;
+            position: sticky;
+            top: 0;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #2b6822; /* Darker green on hover */
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto; /* Add some margin to separate from navbar */
+            text-align: center;
+            background: #ffffff; /* White background for container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #3a8d2d; /* Strong green for title */
+            animation: fadeIn 1.5s ease-in;
+        }
+        .product-list {
+            display: flex;
+            justify-content: space-around; /* Align items in a row */
+            animation: fadeIn 1.5s ease-in;
+        }
+        .product-card {
+            background-color: #ffffff; /* White background for cards */
+            border: 1px solid #a5d6a7; /* Light green border */
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            flex: 1;
+            max-width: 200px;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #66bb6a; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #388e3c; /* Darker green on hover */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('buy_pro') }}" class="nav-link">Buy Products</a>
+            <a href="{{ url_for('view') }}" class="nav-link">View Products</a>
+            <a href="{{ url_for('sell') }}" class="nav-link">Sell Products</a>
+            <a href="{{ url_for('cart') }}" class="nav-link">View Cart</a>
+        </div>
+        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>Buy Fresh Products</h1>
+        <div class="product-list">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='uploads/' + product['Product Image']) }}" alt="{{ product['Product Name'] }}">
+                <h2>{{ product['Product Name'] }}</h2>
+                <p>₹{{ product['Product Price'] }}/kg</p>
+                <button onclick="addToCart('{{ product['Product Name'] }}', 1)">Add to Cart</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function addToCart(productName, quantity) {
+            fetch(`/add_to_cart`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product_name: productName,
+                    quantity: quantity
+                })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert(productName + ' has been added to your cart.');
+                  } else {
+                      alert('Failed to add product to cart.');
+                  }
+              });
+        }
+    </script>
+</body>
+</html>

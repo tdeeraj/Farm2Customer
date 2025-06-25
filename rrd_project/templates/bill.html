@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - Billing</title>
+    <style>
+        /* Your existing CSS styles */
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #eafae1; /* Light green background */
+            color: #2c3e50; /* Darker green text */
+            margin: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3a8d2d; /* Dark green for navbar */
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: #2b6822; /* Darker green on hover */
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #27ae60; /* Bright green for the heading */
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9fbe7; /* Light background for product card */
+        }
+
+        input[type="text"], input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #27ae60; /* Bright green button */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #219653; /* Darker green on hover */
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('buy_pro') }}" class="nav-link">Buy Products</a>
+            <a href="{{ url_for('view') }}" class="nav-link">View Products</a>
+            <a href="{{ url_for('sell') }}" class="nav-link">Sell Products</a>
+            <a href="{{ url_for('cart') }}" class="nav-link">View Cart</a>
+        </div>
+        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>Billing Information</h1>
+        <div id="cart-items" class="product-list">
+            {% set total_cost = 0 %}
+            {% for item in cart_items %}
+            <div class="product-card">
+                <h2>{{ item['Product Name'] }}</h2>
+                <p>Quantity: {{ item['Quantity'] }}</p>
+                <p>Cost: ₹{{ item['Cost'] }}</p>
+                {% set item_total = item['Quantity'] * item['Cost'] %}
+                <p>Total: ₹{{ item_total }}</p>
+                {% set total_cost = total_cost + item_total %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2>Enter Your Details</h2>
+        <form action="{{ url_for('confirm_order') }}" method="POST">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <button type="submit">Confirm Order</button>
+        </form>
+    </div>  
+</body>
+</html>

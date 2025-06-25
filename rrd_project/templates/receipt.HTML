@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #27ae60;
+        }
+
+        .order-details,
+        .payment-details {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Receipt</h1>
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <div id="cart-items">
+                {% set total_cost = 0 %}
+                {% for item in cart_items %}
+                <div>
+                    <strong>{{ item['Product Name'] }}</strong> - Quantity: {{ item['Quantity'] }} - Cost: ₹{{ item['Cost'] }}
+                    {% set item_total = item['Quantity'] * item['Cost'] %}
+                    <p>Total: ₹{{ item_total }}</p>
+                    {% set total_cost = total_cost + item_total %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="payment-details">
+            <h2>Payment Details</h2>
+            <p><strong>Name:</strong> {{ user_details['name'] }}</p>
+            <p><strong>Email:</strong> {{ user_details['email'] }}</p>
+        </div>
+
+        <button onclick="printReceipt()">Print Receipt</button>
+    </div>
+
+    <script>
+        function printReceipt() {
+            window.print();
+        }
+    </script>
+</body>
+
+</html>

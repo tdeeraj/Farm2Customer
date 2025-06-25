@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - Credit Card Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eafae1; /* Light green background */
+            color: #2c3e50; /* Darker green text */
+            margin: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3a8d2d; /* Dark green for navbar */
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: #2b6822; /* Darker green on hover */
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #27ae60; /* Bright green for the heading */
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"], input[type="tel"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #27ae60; /* Bright green button */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #219653; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a href="buy.html" class="nav-link">Buy Products</a>
+            <a href="view.html" class="nav-link">View Products</a>
+            <a href="sell.html" class="nav-link">Sell Products</a>
+            <a href="cart.html" class="nav-link">View Cart</a>
+
+
+    <div class="container">
+        <h1>Credit Card Payment</h1>
+        <form action="receipt.html" method="get">
+            <input type="text" id="name" placeholder="Name on Card" required>
+            <input type="tel" id="card-number" placeholder="Card Number" required>
+            <input type="number" id="expiry-month" placeholder="Expiry Month (MM)" required min="1" max="12">
+            <input type="number" id="expiry-year" placeholder="Expiry Year (YYYY)" required min="2023">
+            <input type="number" id="cvv" placeholder="CVV" required min="100" max="999">
+            <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <a href="RECIPT.HTML" class="nav-link">pay now</a>
+    </div>
+            
+        </form>
+    </div>
+</body>
+</html>

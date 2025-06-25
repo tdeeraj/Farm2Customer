@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market App - Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fbe7; /* Light, earthy background */
+            color: #4e4e4e;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3a8d2d; /* Dark green for navbar */
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: #2b6822; /* Darker green on hover */
+            border-radius: 5px;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #3a8d2d; /* Dark green color */
+            margin-bottom: 20px;
+        }
+
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .photo {
+            width: 200px;
+            height: 150px;
+            background-color: #e3e3e3;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: left;
+            width: 90%;
+            max-width: 1200px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('buy_pro') }}" class="nav-link">Buy Products</a>
+            <a href="{{ url_for('view') }}" class="nav-link">View Products</a>
+            <a href="{{ url_for('sell') }}" class="nav-link">Sell Products</a>
+            <a href="{{ url_for('cart') }}" class="nav-link">View Cart</a>
+        </div>
+        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>Farmers Market Dashboard</h1>
+
+        <div class="photo-gallery">
+            <div class="photo"><img src="{{ url_for('static', filename='photos1.png') }}" alt="Photo 1" style="width:100%; height:auto;"></div>
+            <div class="photo"><img src="{{ url_for('static', filename='photo2.png') }}" alt="Photo 2" style="width:100%; height:auto;"></div>
+            <div class="photo"><img src="{{ url_for('static', filename='photo3.png') }}" alt="Photo 3" style="width:100%; height:auto;"></div>
+            <div class="photo"><img src="{{ url_for('static', filename='photo4.png') }}" alt="Photo 4" style="width:100%; height:auto;"></div>
+        </div>
+
+        <div class="footer">
+            <h2>Website Features</h2>
+            <p>Welcome to the Farmers Market App, where you can:</p>
+            <ul>
+                <li>Buy fresh products from local farmers.</li>
+                <li>View product details and availability.</li>
+                <li>Sell your own products easily.</li>
+                <li>Manage your cart efficiently.</li>
+                <li>Login or sign up for personalized experiences.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light grey background */
+            color: #333;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: #27ae60; /* Bright green for the heading */
+        }
+        .bill-details {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #27ae60;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        button {
+            background-color: #27ae60; /* Bright green button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219653; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Bill</h1>
+    <div class="bill-details" id="bill-details">
+        <p><strong>Payment Method:</strong> <span id="payment-method"></span></p>
+        <p><strong>Total Amount:</strong> <span id="total-amount"></span></p>
+    </div>
+    <button onclick="printBill()">Print Bill</button>
+
+    <script>
+        // Retrieve payment information from local storage
+        const paymentMethod = localStorage.getItem('paymentMethod') || 'Not provided';
+        const totalAmount = localStorage.getItem('totalAmount') || '₹0.00';
+
+        // Display the payment information
+        document.getElementById('payment-method').innerText = paymentMethod;
+        document.getElementById('total-amount').innerText = totalAmount;
+
+        function printBill() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
